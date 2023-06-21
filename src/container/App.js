@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import './App.css';
-import Logo from './component/logo/Logo';
-import Navigation from './component/navigation/Navigation';
-import InputForm from './component/inputForm/InputForm';
-import SignIn from './component/signIn/SignIn';
-import TextToImage from './component/textToImage/TextToImage';
-import Gallery from './component/Gallery';
+import Logo from '../component/logo/Logo';
+import Navigation from '../component/navigation/Navigation';
+import InputForm from '../component/inputForm/InputForm';
+import SignIn from '../component/signIn/SignIn';
+import TextToImage from '../component/textToImage/TextToImage';
+import Gallery from '../component/Gallery';
 import Particles from "react-tsparticles";
 import type { Engine } from "tsparticles-engine";
 import { loadFireflyPreset } from "tsparticles-preset-firefly";
 // import { Configuration, OpenAIApi } from "openai";
-import Register from './component/register/Register';
-import Rank from './component/Rank';
+import Register from '../component/register/Register';
+import Rank from '../component/Rank/Rank';
+
 
 function App() {
-  const [input, setInput] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [route, setRoute] = useState("signin");
+  const [input, setInput] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [route, setRoute] = useState('signin');
   const [isSignIn, setIsSignIn] = useState(false);
   const [user, setUser] = useState(
     {
@@ -35,9 +36,24 @@ function App() {
       name: data.name,
       email: data.email,
       password: data.password,
-      entries: 0,
+      entries: data.entries,
       joined: data.joined
-    })
+    });
+  }
+
+  const clearUser = () => {
+    setInput('');
+    setImageUrl('');
+    setRoute('signin');
+    setIsSignIn(false);
+    setUser({
+      id: '',
+      name: '',
+      email: '',
+      password: '',
+      entries: 0,
+      joined: ''
+    });
   }
 
   const options = {
@@ -60,7 +76,7 @@ function App() {
     if(route === 'home') {
       setIsSignIn(true);
     }else if(route === 'signin') {
-      setIsSignIn(false);
+      clearUser();
     }
     setRoute(route);
   }
@@ -94,54 +110,47 @@ function App() {
     //   return(image_url);
     // }
     // getUrl().then((res) => setImageUrl(res));
-    const raw = JSON.stringify({
-  "user_app_id": {
-    "user_id": "borisdayma",
-    "app_id": "generative-art"
-  },
-  "inputs": [
-      {
-          "data": {
-              "text": {
-                  "raw": 'a Vincent Van Gogh style paint of' + input
-              }
-          }
-      }
-  ]
-});
-
-const requestOptions = {
-    method: 'POST',
-    headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Key ' + '7307a83a63294f25b1a4569ecf26d727'
+  const raw = JSON.stringify({
+    "user_app_id": {
+      "user_id": "borisdayma",
+      "app_id": "generative-art"
     },
-    body: raw
-};
+    "inputs": [
+        {
+            "data": {
+                "text": {
+                    "raw": 'a Vincent Van Gogh style paint of' + input
+                }
+            }
+        }
+    ]
+  });
 
-
-fetch(`https://api.clarifai.com/v2/models/general-image-generator-dalle-mini/versions/86c0ae39083e45a8bf96fde91f4e1952/outputs`, requestOptions)
-    .then(response => {
-      if(response) {
-        fetch('http://localhost:3000/image',
-          {
-            method: 'put',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              id: user.id
-            })
-          }
-        ) 
-        .then(response => response.json())
-        .then(result => setUser(Object.assign(user,{entries: result})))
-      }
-      return response;
+  fetch('http://localhost:3000/imageurl', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      inputText: raw
     })
-    .then(response => response.json())
-    .then(result => {
-      setImageUrl(result.outputs[0].data.image.base64)
-    })
-    .catch(error => console.log('error', error));
+  })
+  .then(response => response.json())
+  .then(response => {
+    if(response) {
+      fetch('http://localhost:3000/image',
+        {
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            id: user.id
+          })
+        }) 
+      .then(response => response.json())
+      .then(result => setUser(Object.assign(user,{entries: result})))
+      .catch(console.log);
+    }
+    setImageUrl(response.outputs[0].data.image.base64)
+  })
+  .catch(error => console.log('error', error));
 }
 
   async function customInit(engine: Engine): Promise<void> {
@@ -155,14 +164,13 @@ fetch(`https://api.clarifai.com/v2/models/general-image-generator-dalle-mini/ver
       {route === 'home' 
         ? <div>
             <Logo />
-            <Rank 
-              name={user.name}
-              entries={user.entries} />
             <InputForm 
               onInputChange={onInputChange}
               handleClick={onButtonSubmit} />
             <TextToImage imageUrl={imageUrl} />
-            <Gallery />
+            <Rank 
+              name={user.name}
+              entries={user.entries} />
           </div>
         : (route === 'signin' 
           ? <SignIn onRouteChange={onRouteChange} loadUser={loadUser} />

@@ -2,3 +2,14 @@
 	display: flex;
 	justify-content: flex-end;
 }
+
+.button {
+  color: black;
+  margin: 1rem;
+  display: inline;
+
+}
+
+.button:hover {
+  opacity: 0.6
+}

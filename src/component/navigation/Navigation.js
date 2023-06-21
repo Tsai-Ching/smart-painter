@@ -7,15 +7,13 @@ const Navigation = ({ onRouteChange, isSignIn }) => {
 	  	{isSignIn
 	  		? <div>
 			    <nav className='nav'>
-			    	<p onClick={() => onRouteChange('signin')} >Sign out</p>
+			    	<p className='button' onClick={() => onRouteChange('signin')} >Sign out</p>
 			    </nav>
 			</div>
 			: <div>
 			    <nav className='nav'>
-			    	<p onClick={() => onRouteChange('signin')} >Signin</p>
-			    </nav>
-			    <nav className='nav'>
-			    	<p onClick={() => onRouteChange('register')} >Register</p>
+			    	<p className='button' onClick={() => onRouteChange('signin')} >Sign in</p>
+			    	<p className='button' onClick={() => onRouteChange('register')} >Register</p>
 			    </nav>
 			</div>
 		}

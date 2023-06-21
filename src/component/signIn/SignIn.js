@@ -3,37 +3,40 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './Signin.css';
+import FormInput from '../Form/FormInput';
 
 const SignIn = ({ onRouteChange, loadUser}) => {
-	const [signInEmail, setSignInEmail] = useState(false);
-	const [signInPassword, setSignInPassword] = useState(false);
+	const [form, setForm] = useState({
+	  email: '',
+	  password: ''
+	});
 
-	const onEmailChange = (e) => {
-		setSignInEmail(e.target.value);
-	}
-	const onPasswordChange = (e) => {
-		setSignInPassword(e.target.value);
-	}
+	const handleFormChange = (event) => {
+    	const updatedForm = {...form};
+    	updatedForm[event.target.name] = event.target.value;
+	    setForm(updatedForm);
+	};
 
 	const onSubmitChange = (e) => {
 		e.preventDefault();
 		fetch('http://localhost:3000/signin',
 			{
 				method: 'post',
-				headers: {'Content-Type': 'application/json'},
 				body: JSON.stringify({
-					email: signInEmail,
-					password: signInPassword
-				})
+					email: form.email,
+					password: form.password
+				}),
+				headers: {'Content-Type': 'application/json'},
 			}
 		)
 		.then(response => response.json())
 		.then(user => {
-			if(user) {
+			if(user.id) {
 				loadUser(user);
 				onRouteChange('home');
 			}
 		})
+		.catch(console.log);
 	}
 
   	return (
@@ -41,21 +44,21 @@ const SignIn = ({ onRouteChange, loadUser}) => {
 	  		<div className="card align-self-center">
 		  		<div className="card-body">
 					<Form>
-				      <Form.Group className="mb-3" controlId="formBasicEmail">
-				        <Form.Label>Email address</Form.Label>
-				        <Form.Control type="email" placeholder="Enter email" onChange={onEmailChange} />
-				        <Form.Text className="text-muted">
-				          We'll never share your email with anyone else.
-				        </Form.Text>
-				      </Form.Group>
+						<h1>Login</h1>
+				      	<FormInput 
+					    	label='Email address'
+					    	name='email'
+						 	type="email" 
+						  	placeholder="Enter email" 
+						 	onChange={handleFormChange} />
 
-				      <Form.Group className="mb-3" controlId="formBasicPassword">
-				        <Form.Label>Password</Form.Label>
-				        <Form.Control type="password" placeholder="Password" onChange={onPasswordChange} />
-				      </Form.Group>
-				      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-				        <Form.Check type="checkbox" label="Check me out" />
-				      </Form.Group>
+				     	<FormInput 
+				     		label='Password'
+							type="password"
+							name='password'
+							placeholder="Password" 
+							onChange={handleFormChange} />
+
 				      <Button variant="dark" type="submit" value="signin" onClick={onSubmitChange} >
 				        Submit
 				      </Button>

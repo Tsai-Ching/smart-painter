@@ -8,9 +8,3 @@
 	box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
 	margin: 0 auto;
 }
-
-.card-body h1 {
-    padding: 0;
-    margin: 1rem;
-    text-align: center;
-}

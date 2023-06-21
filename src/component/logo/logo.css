@@ -1,4 +1,6 @@
 .logo {
+	display: inline;
 	position: absolute;
 	margin: 2rem;
+	top: 0;
 }

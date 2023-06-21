@@ -1,0 +1,16 @@
+.title {
+	text-align: center;
+    font-family: monospace, sans-serif;
+}
+
+.p1 {
+    font-weight: bold;
+    display: inline;
+}
+
+.p2 {
+    font-weight: bold;
+    font-size: 5rem;
+    color: red;
+    display: inline;
+}
