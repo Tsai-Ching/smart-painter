@@ -98,7 +98,7 @@ function App() {
   .then(response => response.json())
   .then(response => {
     if(response) {
-      fetch('https://rocky-ridge-54072-d78e582ad964.herokuapp.com/image',
+      fetch('https://smart-painter-api.onrender.com/image',
         {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
