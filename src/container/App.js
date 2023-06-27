@@ -110,10 +110,9 @@ function App() {
       inputText: raw
     })
   })
-  .then(response => response.json())
+  .then(response => console.log(response.json())
   .then(response => {
     if(response) {
-      console.log(response)
       fetch('https://smart-painter-api.onrender.com/image',
         {
           method: 'put',
