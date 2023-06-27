@@ -113,6 +113,7 @@ function App() {
   .then(response => response.json())
   .then(response => {
     if(response) {
+      console.log(response)
       fetch('https://smart-painter-api.onrender.com/image',
         {
           method: 'put',
@@ -125,7 +126,6 @@ function App() {
       .then(result => setUser(Object.assign(user,{entries: result})))
       .catch(console.log);
     }
-    console.log(response)
     //setImageUrl(response.outputs[0].data.image.base64)
     setIsResponse(true)
   })
