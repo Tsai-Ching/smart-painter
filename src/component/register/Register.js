@@ -20,8 +20,7 @@ const Register = ({ onRouteChange,loadUser }) => {
 
 	const onSubmitChange = (e) => {
 		e.preventDefault();
-		console.log(form)
-		fetch('http://localhost:3000/register',
+		fetch('https://smart-painter-api.onrender.com/register',
 			{
 				method: 'post',
 				headers: {'Content-Type': 'application/json'},
