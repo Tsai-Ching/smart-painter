@@ -87,33 +87,18 @@ function App() {
     event.preventDefault();
     setIsResponse(false)
     setIsSubmit(true);
-    const raw = JSON.stringify({
-      "user_app_id": {
-        "user_id": "borisdayma",
-        "app_id": "generative-art"
-      },
-      "inputs": [
-          {
-              "data": {
-                  "text": {
-                      "raw": 'a Vincent Van Gogh style paint of' + input
-                  }
-              }
-          }
-      ]
-    });
 
   fetch('https://smart-painter-api.onrender.com/imageurl', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      inputText: raw
+      inputText: input
     })
   })
-  .then(response => console.log(response.json()))
+  .then(response => response.json())
   .then(response => {
     if(response) {
-      fetch('https://smart-painter-api.onrender.com/image',
+      fetch('https://rocky-ridge-54072-d78e582ad964.herokuapp.com/image',
         {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
@@ -125,7 +110,7 @@ function App() {
       .then(result => setUser(Object.assign(user,{entries: result})))
       .catch(console.log);
     }
-    //setImageUrl(response.outputs[0].data.image.base64)
+    setImageUrl(response.outputs[0].data.image.base64)
     setIsResponse(true)
   })
   .catch(error => console.log('error', error));
