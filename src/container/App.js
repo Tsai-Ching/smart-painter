@@ -110,7 +110,7 @@ function App() {
       .then(result => setUser(Object.assign(user,{entries: result})))
       .catch(console.log);
     }
-    setImageUrl(response.outputs[0].data.image.base64)
+    setImageUrl(response)
     setIsResponse(true)
   })
   .catch(error => console.log('error', error));
