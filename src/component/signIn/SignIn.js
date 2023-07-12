@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './Signin.css';
 import FormInput from '../Form/FormInput';
-import Skeleton from 'react-loading-skeleton';
 
 const SignIn = ({ onRouteChange, loadUser}) => {
 	const [form, setForm] = useState({
@@ -15,7 +14,7 @@ const SignIn = ({ onRouteChange, loadUser}) => {
 	const handleFormChange = (event) => {
     	const updatedForm = {...form};
     	updatedForm[event.target.name] = event.target.value;
-	    setForm(updatedForm);	
+	    setForm(updatedForm);
 	};
 
 	const onSubmitChange = (e) => {
@@ -41,38 +40,33 @@ const SignIn = ({ onRouteChange, loadUser}) => {
 	}
 
   	return (
-		{loading ? (
-			<Skeleton width="25%" />
-		) : (
-			<div className='login d-flex'>
-				<div className="card align-self-center">
-					<div className="card-body">
-						<Form>
-							<h1>Login</h1>
-							<FormInput 
-								label='Email address'
-								name='email'
-								type="email" 
-								placeholder="Enter email" 
-								onChange={handleFormChange} />
+	  	<div className='login d-flex'>
+	  		<div className="card align-self-center">
+		  		<div className="card-body">
+					<Form>
+						<h1>Login</h1>
+				      	<FormInput 
+					    	label='Email address'
+					    	name='email'
+						 	type="email" 
+						  	placeholder="Enter email" 
+						 	onChange={handleFormChange} />
 
-							<FormInput 
-								label='Password'
-								type="password"
-								name='password'
-								placeholder="Password" 
-								onChange={handleFormChange} />
+				     	<FormInput 
+				     		label='Password'
+							type="password"
+							name='password'
+							placeholder="Password" 
+							onChange={handleFormChange} />
 
-						<Button variant="dark" type="submit" value="signin" onClick={onSubmitChange} >
-							Submit
-						</Button>
-						</Form>
-					</div>
-				</div>
-			</div>
-			)
-		}
-  	);
+				      <Button variant="dark" type="submit" value="signin" onClick={onSubmitChange} >
+				        Submit
+				      </Button>
+				    </Form>
+			    </div>
+		    </div>
+		</div>
+  );
 }
 
 export default SignIn;

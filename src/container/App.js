@@ -12,11 +12,9 @@ import { loadFireflyPreset } from "tsparticles-preset-firefly";
 import Register from '../component/register/Register';
 import Rank from '../component/Rank/Rank';
 import Loader from '../component/loader/Loader';
-import "react-loading-skeleton/dist/skeleton.css";
 
 
 function App() {
-  const [loading, setLoading] = useState(true);
   const [input, setInput] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [route, setRoute] = useState('signin');
@@ -139,8 +137,8 @@ function App() {
               entries={user.entries} />
           </div>
         : (route === 'signin' 
-          ? <SignIn onRouteChange={onRouteChange} loadUser={loadUser} loading={loading} />
-          : <Register onRouteChange={onRouteChange} loadUser={loadUser} loading={loading} />
+          ? <SignIn onRouteChange={onRouteChange} loadUser={loadUser} />
+          : <Register onRouteChange={onRouteChange} loadUser={loadUser} />
           )
       }
     </div>
