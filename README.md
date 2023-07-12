@@ -1,7 +1,5 @@
 # smart-painter
 
-This is an App build with React.
-
 ## Project Overview
 
 This is a hands-on project from the Udemy course - The Complete Web Developer in 2023: Zero to Mastery by Andrei Neagoie. To improve documents reading and API integration, alternatives libraries and 3rd party API are used on this project.
