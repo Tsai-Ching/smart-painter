@@ -8,7 +8,7 @@ This is a hands-on project from the Udemy course - The Complete Web Developer in
 
 - Use [react-tsparticles](react-tsparticles) and [background generator](https://github.com/Tsai-Ching/background-generator) as background.
 - Use Create React App to create an interface.
-- Generate Images With DALL·E 2 API from OpenAI.
+- Generate Images With [DALL·E 2](https://openai.com/dall-e-2) API from OpenAI.
 - Using the PostgreSQL database to store and manage user identities, access permissions, and login status.
 
 ## Installation and Execution
