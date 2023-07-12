@@ -25,14 +25,13 @@ You can find smart-painter-api [here](https://github.com/Tsai-Ching/smart-painte
 
 - A PERN (PostgreSQL + Express.js + React.js + Node.js) full stack project.
 - RESTful API:
-| Method | Route              | Description                             |
-| ------ | ------------------ | --------------------------------------- |
-| POST   | /api/signin        | Validation                              |
-| POST   | /api/register      | Add user info (input) to database       |
-| GET    | /api/profile/:id   | Present user info after signin          |
-| PUT    | /api/image         | cover imageurl to image and display it  |
-| POST   | /api/imageurl      | Fetch a response from DALL-E            |
-
+| Method | Route            | Description                            |
+| ------ | ---------------- | -------------------------------------- |
+| POST   | /api/signin      | Validation                             |
+| POST   | /api/register    | Add user info (input) to database      |
+| GET    | /api/profile/:id | Present user info after signin         |
+| PUT    | /api/image       | Convert cover image URL to image       |
+| POST   | /api/imageurl    | Fetch a response from DALL-E           |
 
 ## Technologies
 
