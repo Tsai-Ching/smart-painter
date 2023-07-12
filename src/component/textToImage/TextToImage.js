@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import './TextToImage.css'
 
 const TextToImage = ({ imageUrl }) => {
-	const str = 'data:image/png;base64,' + imageUrl;
+	const str = imageUrl;
   return (
     <div className='image-container'>
     	<div className='image'>
