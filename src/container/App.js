@@ -107,7 +107,7 @@ function App() {
           })
         }) 
       .then(response => response.json())
-      .then(result => setUser(Object.assign(user,{entries: result})))
+      .then(result => setUser({...user,entries: result}))
       .catch(console.log);
     }
     setImageUrl(response)
