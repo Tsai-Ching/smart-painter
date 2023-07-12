@@ -21,7 +21,18 @@ The page will reload when you make changes.
 
 ## Demo
 
-![Demo](https://user-images.githubusercontent.com/108188981/252555645-adadbc0d-1e04-4e4a-90d5-7e0f92eea7e6.gif)
+![Demo](https://user-images.githubusercontent.com/108188981/252830114-7230aa41-31b2-44f0-b7ed-c300e37f43c0.png))
+
+-------------------------------------------------------------------------
+Todos Route
+-------------------------------------------------------------------------
+[Method]  [Route]
+GET       /api/todos              Fetch all todos
+POST      /api/todos              Create a new todo
+GET       /api/todos/:id          Fetch a todo status
+POST      /api/todos/:id          Toggle (complete or not) a task
+PATCH     /api/todos/:id          Update the todo content
+DELETE    /api/todos/:id          Delete todo
 
 
 ## Technologies
