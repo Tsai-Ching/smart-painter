@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormInput from '../Form/FormInput';
 import './Register.css';
+import Skeleton from 'react-loading-skeleton';
 
 const Register = ({ onRouteChange,loadUser }) => {
 	const [form, setForm] = useState({
